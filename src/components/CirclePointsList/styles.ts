@@ -7,7 +7,12 @@ interface CircleListItemProps {
 }
 
 export const CircleListItem = styled.div<CircleListItemProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
+  cursor: pointer;
+  z-index: 3;
   width: 8px;
   height: 8px;
   background-color: ${({ color }) => color};

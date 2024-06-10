@@ -17,5 +17,13 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Oswald', sans-serif;
     font-weight: 400;
     font-size: 16px;
+    background-color: #F4F5F9;
+   font-family: PT Sans, sans-serif;
   }
+
+
+  h1 {
+    color: #42567A;
+  }
+  
 `;
