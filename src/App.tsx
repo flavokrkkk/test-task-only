@@ -2,6 +2,7 @@ import Circle from "./components/Circle/Circle";
 import CirclePoints from "./components/CirclePoints/CirclePoints";
 import Swiper from "./components/Swiper/Swiper";
 import {
+  ArrowsWrapper,
   BlockTitle,
   Container,
   HorizontalLine,
@@ -15,9 +16,41 @@ import {
 } from "./styles/app";
 import "swiper/css";
 import "swiper/css/navigation";
-import { dataSlide } from "./utils/mockData";
+import { AllData, handleActiveSlide, handleMinMaxYear } from "./utils/mockData";
+import { useEffect, useState } from "react";
+import { ISlide } from "./models/ISlide";
+import { useAppSelector } from "./hooks/useAppSelector";
+import { countSelector } from "./store/selectors";
+import { useActions } from "./hooks/useActions";
+import ArrowsPanel from "./components/ArrowsPanel/ArrowsPanel";
 
 function App() {
+  const { count } = useAppSelector(countSelector);
+  const { setCount } = useActions();
+
+  const [isDisabledNext, setIsDisabledNext] = useState(false);
+  const [isDisabledPrev, setIsDisabledPrev] = useState(false);
+  const [activeData, setActiveData] = useState<ISlide[]>([]);
+
+  const handleNextSlide = () => {
+    setCount(count + 1);
+  };
+
+  const handlePrevSlide = () => {
+    setCount(count - 1);
+  };
+
+  useEffect(() => {
+    count >= 6 ? setIsDisabledNext(true) : setIsDisabledNext(false);
+    count <= 1 ? setIsDisabledPrev(true) : setIsDisabledPrev(false);
+  }, [count]);
+
+  useEffect(() => {
+    setActiveData(handleActiveSlide(count));
+  }, [count]);
+
+  const date = handleMinMaxYear(activeData);
+
   return (
     <>
       <Container>
@@ -31,11 +64,21 @@ function App() {
             <CirclePoints radius={265} numPoints={6} color="#42567A" />
           </Circle>
           <NumberWrapper>
-            <NumberOneTitle>2015</NumberOneTitle>
-            <NumberTwoTitle>2022</NumberTwoTitle>
+            <NumberOneTitle>{date.min}</NumberOneTitle>
+            <NumberTwoTitle>{date.max}</NumberTwoTitle>
           </NumberWrapper>
+          <ArrowsWrapper>
+            <ArrowsPanel
+              isDisabledNext={isDisabledNext}
+              isDisabledPrev={isDisabledPrev}
+              AllData={AllData}
+              count={count}
+              handleNextSlide={handleNextSlide}
+              handlePrevSlide={handlePrevSlide}
+            />
+          </ArrowsWrapper>
           <SliderWrapper>
-            <Swiper dataSlide={dataSlide} />
+            <Swiper dataSlide={activeData} />
           </SliderWrapper>
         </MainWrapper>
       </Container>

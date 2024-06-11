@@ -1,6 +1,6 @@
 import { FC, useRef, useState } from "react";
 import { IPoint } from "../../models/IPoint";
-import { CircleListItem } from "./styles";
+import { CircleActive, CircleListItem } from "./styles";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -8,20 +8,30 @@ interface CirclePointsListProps {
   point: IPoint;
   color: string;
   index: number;
+  count: number;
+  setCount: (value: number) => void;
 }
 
 const CirclePointsList: FC<CirclePointsListProps> = ({
   point,
   color,
   index,
+  count,
+  setCount,
 }) => {
   const [isAnimate, setIsAnimate] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
 
+  const isActiveCount = count === index + 1;
+
+  const handleActiveCount = () => {
+    setCount(index + 1);
+    setIsAnimate(false);
+  };
+
   useGSAP(() => {
     ref.current?.addEventListener("mouseenter", () => {
-      console.log(point.x, point.y);
       gsap.to(ref.current, {
         height: 56,
         width: 56,
@@ -33,8 +43,7 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
       setIsAnimate(true);
     });
 
-    ref.current?.addEventListener("mouseleave", () => {
-      console.log(point.x, point.y);
+    return ref.current?.addEventListener("mouseleave", () => {
       gsap.to(ref.current, {
         height: 8,
         width: 8,
@@ -42,15 +51,28 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
         duration: 0.15,
         backgroundColor: color,
       });
+      console.log("dwwd");
       setIsAnimate(false);
     });
-  }, []);
+  }, [count]);
 
   return (
     <>
-      <CircleListItem ref={ref} point={point} color={color}>
-        {isAnimate && <span>{index + 1}</span>}
-      </CircleListItem>
+      {isActiveCount ? (
+        <CircleActive point={point} color={color} className="aboba">
+          {<span>{index + 1}</span>}
+        </CircleActive>
+      ) : (
+        <CircleListItem
+          className="goga"
+          ref={ref}
+          point={point}
+          color={color}
+          onClick={handleActiveCount}
+        >
+          {isAnimate && <span>{index + 1}</span>}
+        </CircleListItem>
+      )}
     </>
   );
 };

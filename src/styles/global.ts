@@ -18,7 +18,7 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-size: 16px;
     background-color: #F4F5F9;
-   font-family: PT Sans, sans-serif;
+    font-family: PT Sans, sans-serif;
   }
 
 

@@ -1,5 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, useRef } from "react";
 import { CircleContainer, CircleWrapper } from "./styles";
+import { useGSAP } from "@gsap/react";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { countSelector } from "../../store/selectors";
+import { gsap } from "gsap/gsap-core";
 
 interface CircleProps {
   radius: number;
@@ -8,9 +12,13 @@ interface CircleProps {
 }
 
 const Circle: FC<CircleProps> = ({ radius, color, children }) => {
+  const { count } = useAppSelector(countSelector);
+
+  const ref = useRef<HTMLDivElement>(null);
+
   return (
     <CircleContainer>
-      <CircleWrapper color={color} radius={radius}></CircleWrapper>
+      <CircleWrapper ref={ref} color={color} radius={radius}></CircleWrapper>
       {children}
     </CircleContainer>
   );

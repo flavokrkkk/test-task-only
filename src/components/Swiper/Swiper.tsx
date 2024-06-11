@@ -1,62 +1,84 @@
-import { FC, useRef } from "react";
-import { Navigation } from "swiper/modules";
-import { SwiperRef, SwiperSlide, Swiper as Swipers } from "swiper/react";
+import { FC, useRef, useState } from "react";
+import { SwiperRef, Swiper as Swipers } from "swiper/react";
 import { ISlide } from "../../models/ISlide";
+import {
+  SlideCard,
+  SlideCardText,
+  SlideCardTitle,
+  SwiperContainer,
+} from "./styles";
+import { ButtonPosition, ButtonTop, consts } from "../../utils/const";
+import ArrowPrev from "../../assets/ArrowPrev";
+import ArrowNext from "../../assets/ArrowNext";
+import Button from "../UI/Button/Button";
 
 interface SwiperProps {
   dataSlide: ISlide[];
 }
 
 const Swiper: FC<SwiperProps> = ({ dataSlide }) => {
+  const [isVisibleNext, setIsVisibleNext] = useState(true);
+  const [isVisiblePrev, setIsVisiblePrev] = useState(false);
+
   const swiperRef = useRef<SwiperRef>(null);
 
   const handleSlideChange = (index: number) => {
     swiperRef.current?.swiper.slideTo(index);
   };
 
+  const handleSlidePrev = () => {
+    handleSlideChange(0);
+  };
+  const handleSlideNext = () => {
+    handleSlideChange(dataSlide.length - 1);
+  };
+
   return (
-    <div style={{ width: "1300px", margin: "0 auto" }}>
+    <SwiperContainer>
       <Swipers
         ref={swiperRef}
-        slidesPerView={3}
+        slidesPerView={consts.SLIDES_PER_VIEW}
         spaceBetween={30}
+        onSlideNextTransitionStart={() => {
+          setIsVisibleNext(false);
+          setIsVisiblePrev(true);
+        }}
+        onSlidePrevTransitionStart={() => {
+          setIsVisiblePrev(false);
+          setIsVisibleNext(true);
+        }}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
-        style={{
-          height: "200px",
-        }}
-        navigation={{
-          nextEl: ".custom-button-next",
-          prevEl: ".custom-button-prev",
-        }}
-        modules={[Navigation]}
       >
         {dataSlide.map((slide) => (
-          <SwiperSlide key={slide.id} style={{ padding: "25px" }}>
-            <h3
-              style={{
-                marginBottom: "20px",
-                fontSize: "25px",
-                color: "#3877EE",
-              }}
-            >
-              {slide.year}
-            </h3>
-            <p style={{ fontSize: "20px", color: "#42567A" }}>{slide.text}</p>
-          </SwiperSlide>
+          <SlideCard>
+            <SlideCardTitle>{slide.year}</SlideCardTitle>
+            <SlideCardText>{slide.text}</SlideCardText>
+          </SlideCard>
         ))}
       </Swipers>
-      <button
-        style={{ top: "875px" }}
-        className="swiper-button-prev"
-        onClick={() => handleSlideChange(0)}
-      ></button>
-      <button
-        style={{ top: "875px" }}
-        className="swiper-button-next"
-        onClick={() => handleSlideChange(3)}
-      ></button>
-    </div>
+      {isVisiblePrev && (
+        <Button
+          absolute
+          top={ButtonTop.end}
+          position={ButtonPosition.left}
+          onClick={handleSlidePrev}
+        >
+          <ArrowPrev />
+        </Button>
+      )}
+
+      {isVisibleNext && (
+        <Button
+          absolute
+          position={ButtonPosition.right}
+          top={ButtonTop.end}
+          onClick={handleSlideNext}
+        >
+          <ArrowNext />
+        </Button>
+      )}
+    </SwiperContainer>
   );
 };
 

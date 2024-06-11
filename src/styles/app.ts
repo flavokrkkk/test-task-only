@@ -78,3 +78,10 @@ export const SliderWrapper = styled.div`
   flex-direction: column;
   justify-content: end;
 `;
+
+export const ArrowsWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  padding: 70px;
+  bottom: 150px;
+`;
