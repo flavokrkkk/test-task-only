@@ -14,6 +14,7 @@ export const MainWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: calc(100vh);
+  border: 1px solid #42567a;
 `;
 
 const Line = styled.div`
