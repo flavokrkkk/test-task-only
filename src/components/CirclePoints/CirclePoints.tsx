@@ -1,19 +1,21 @@
 import { FC } from "react";
-import { getCirclePoints } from "../../helpers/getCirclePoints";
 import CirclePointsList from "../CirclePointsList/CirclePointsList";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { countSelector } from "../../store/selectors";
 import { useActions } from "../../hooks/useActions";
+import { IPoint } from "../../models/IPoint";
 
 interface CirclePointsProps {
-  radius: number;
-  numPoints: number;
+  points: IPoint[];
   color: string;
+  handleRotateCircle: (point: IPoint, index: number) => void;
 }
 
-const CirclePoints: FC<CirclePointsProps> = ({ radius, numPoints, color }) => {
-  const points = getCirclePoints(radius, numPoints);
-
+const CirclePoints: FC<CirclePointsProps> = ({
+  points,
+  color,
+  handleRotateCircle,
+}) => {
   const { count } = useAppSelector(countSelector);
 
   const { setCount } = useActions();
@@ -28,6 +30,7 @@ const CirclePoints: FC<CirclePointsProps> = ({ radius, numPoints, color }) => {
           key={index}
           index={index}
           setCount={setCount}
+          handleRotateCircle={handleRotateCircle}
         />
       ))}
     </>

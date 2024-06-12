@@ -6,6 +6,7 @@ export const Container = styled.div`
   border-left: 1px solid #42567a;
   border-right: 1px solid #42567a;
   position: relative;
+
   height: 100vh;
 `;
 
@@ -28,6 +29,7 @@ export const HorizontalLine = styled(Line)`
   transform: translateY(-20%);
   background-color: #42567a;
   z-index: 3;
+  opacity: 50%;
 `;
 
 export const VerticalLine = styled(Line)`
@@ -36,6 +38,7 @@ export const VerticalLine = styled(Line)`
   left: 50%;
   transform: translateX(-20%);
   background-color: #42567a;
+  opacity: 50%;
 `;
 
 export const BlockTitle = styled.div`
@@ -54,7 +57,7 @@ export const Title = styled.h1`
 `;
 
 export const NumberWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 2;
   display: flex;
   gap: 105px;
@@ -72,7 +75,7 @@ export const NumberTwoTitle = styled.h1`
 
 export const SliderWrapper = styled.div`
   width: 1440px;
-  position: absolute;
+  // position: absolute;
   height: 100vh;
   display: flex;
   flex-direction: column;

@@ -1,5 +1,4 @@
 import Circle from "./components/Circle/Circle";
-import CirclePoints from "./components/CirclePoints/CirclePoints";
 import Swiper from "./components/Swiper/Swiper";
 import {
   ArrowsWrapper,
@@ -60,9 +59,7 @@ function App() {
         <HorizontalLine />
         <VerticalLine />
         <MainWrapper>
-          <Circle radius={265} color="#42567A">
-            <CirclePoints radius={265} numPoints={6} color="#42567A" />
-          </Circle>
+          <Circle radius={265} color="#42567A"></Circle>
           <NumberWrapper>
             <NumberOneTitle>{date.min}</NumberOneTitle>
             <NumberTwoTitle>{date.max}</NumberTwoTitle>

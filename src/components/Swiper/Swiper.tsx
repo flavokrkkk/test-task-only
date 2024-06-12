@@ -11,6 +11,8 @@ import { ButtonPosition, ButtonTop, consts } from "../../utils/const";
 import ArrowPrev from "../../assets/ArrowPrev";
 import ArrowNext from "../../assets/ArrowNext";
 import Button from "../UI/Button/Button";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 interface SwiperProps {
   dataSlide: ISlide[];
@@ -32,6 +34,38 @@ const Swiper: FC<SwiperProps> = ({ dataSlide }) => {
   const handleSlideNext = () => {
     handleSlideChange(dataSlide.length - 1);
   };
+
+  useGSAP(() => {
+    const textEl = swiperRef.current;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    tl.to(textEl, {
+      duration: 0.4,
+      opacity: 0,
+      // scale: 0.8,
+      ease: "power2.out",
+      delay: 0.001,
+    });
+
+    tl.to(textEl, {
+      duration: 0.5,
+      opacity: 1,
+      scale: 1,
+      ease: "power2.out",
+      delay: 0.01,
+    });
+
+    return () => {
+      tl.kill();
+    };
+  }, [dataSlide]);
 
   return (
     <SwiperContainer>

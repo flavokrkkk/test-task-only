@@ -20,7 +20,7 @@ export const ButttonStyle = styled.button<ButtonStyleProps>`
     switch (top !== undefined) {
       case top === ButtonTop.end:
         return css`
-          top: 975px;
+          top: 870px;
         `;
     }
   }};

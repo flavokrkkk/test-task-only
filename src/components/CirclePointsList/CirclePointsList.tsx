@@ -10,6 +10,7 @@ interface CirclePointsListProps {
   index: number;
   count: number;
   setCount: (value: number) => void;
+  handleRotateCircle: (point: IPoint, index: number) => void;
 }
 
 const CirclePointsList: FC<CirclePointsListProps> = ({
@@ -18,16 +19,19 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
   index,
   count,
   setCount,
+  handleRotateCircle,
 }) => {
   const [isAnimate, setIsAnimate] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
+  const activeRef = useRef<HTMLDivElement>(null);
 
   const isActiveCount = count === index + 1;
 
   const handleActiveCount = () => {
     setCount(index + 1);
     setIsAnimate(false);
+    handleRotateCircle(point, index);
   };
 
   useGSAP(() => {
@@ -35,7 +39,7 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
       gsap.to(ref.current, {
         height: 56,
         width: 56,
-        transform: `translate(${point.x - 25}px, ${point.y - 26}px)`,
+        transform: `translate(${point.x}px, ${point.y}px)`,
         duration: 0.15,
         backgroundColor: "#F4F5F9",
         border: "1px solid #42567a",
@@ -51,7 +55,6 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
         duration: 0.15,
         backgroundColor: color,
       });
-      console.log("dwwd");
       setIsAnimate(false);
     });
   }, [count]);
@@ -59,12 +62,11 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
   return (
     <>
       {isActiveCount ? (
-        <CircleActive point={point} color={color} className="aboba">
+        <CircleActive ref={activeRef} point={point} color={color}>
           {<span>{index + 1}</span>}
         </CircleActive>
       ) : (
         <CircleListItem
-          className="goga"
           ref={ref}
           point={point}
           color={color}
@@ -78,3 +80,6 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
 };
 
 export default CirclePointsList;
+
+//104.50000000000003px, -258.49673200287623px
+//67.00129134564013
