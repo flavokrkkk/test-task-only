@@ -10,7 +10,7 @@ interface CirclePointsListProps {
   index: number;
   count: number;
   setCount: (value: number) => void;
-  handleRotateCircle: (point: IPoint, index: number) => void;
+  handleRotateCircle: (point: IPoint) => void;
 }
 
 const CirclePointsList: FC<CirclePointsListProps> = ({
@@ -31,7 +31,7 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
   const handleActiveCount = () => {
     setCount(index + 1);
     setIsAnimate(false);
-    handleRotateCircle(point, index);
+    handleRotateCircle(point);
   };
 
   useGSAP(() => {
