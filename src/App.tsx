@@ -22,6 +22,7 @@ import { useAppSelector } from "./hooks/useAppSelector";
 import { countSelector } from "./store/selectors";
 import { useActions } from "./hooks/useActions";
 import ArrowsPanel from "./components/ArrowsPanel/ArrowsPanel";
+import { IPoint } from "./models/IPoint";
 
 function App() {
   const { count } = useAppSelector(countSelector);
@@ -33,10 +34,15 @@ function App() {
 
   const handleNextSlide = () => {
     setCount(count + 1);
+    //получать массив points, пробегаться по нему и передавать выбранный каунт в функцию
   };
 
   const handlePrevSlide = () => {
     setCount(count - 1);
+  };
+
+  const ddd = (point: IPoint) => {
+    console.log("ddd", point);
   };
 
   useEffect(() => {
@@ -59,7 +65,7 @@ function App() {
         <HorizontalLine />
         <VerticalLine />
         <MainWrapper>
-          <Circle radius={265} color="#42567A"></Circle>
+          <Circle radius={265} color="#42567A" ddd={ddd} />
           <NumberWrapper>
             <NumberOneTitle>{date.min}</NumberOneTitle>
             <NumberTwoTitle>{date.max}</NumberTwoTitle>

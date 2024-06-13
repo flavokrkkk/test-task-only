@@ -9,6 +9,8 @@ interface CirclePointsListProps {
   color: string;
   index: number;
   count: number;
+  ddd: (point: IPoint) => void;
+  calcRotate: number | undefined;
   setCount: (value: number) => void;
   handleRotateCircle: (point: IPoint) => void;
 }
@@ -18,7 +20,9 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
   color,
   index,
   count,
+  calcRotate,
   setCount,
+  ddd,
   handleRotateCircle,
 }) => {
   const [isAnimate, setIsAnimate] = useState(false);
@@ -32,13 +36,30 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
     setCount(index + 1);
     setIsAnimate(false);
     handleRotateCircle(point);
+    ddd(point);
   };
+
+  useGSAP(() => {
+    const timeline = gsap.timeline({ paused: true });
+
+    timeline.to(activeRef.current, {
+      duration: 1,
+      rotation: `+=${359.8 - point.rotate}`,
+      // ease: "sine.inOut",
+      ease: "power4.inOut",
+
+      transformOrigin: "center center",
+    });
+
+    timeline.play();
+  }, [handleActiveCount]);
 
   useGSAP(() => {
     ref.current?.addEventListener("mouseenter", () => {
       gsap.to(ref.current, {
-        height: 56,
-        width: 56,
+        height: 62,
+        width: 62,
+        rotation: `+=${calcRotate ? 180 - point.rotate + calcRotate : 0}`,
         transform: `translate(${point.x}px, ${point.y}px)`,
         duration: 0.15,
         backgroundColor: "#F4F5F9",
@@ -62,8 +83,18 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
   return (
     <>
       {isActiveCount ? (
-        <CircleActive ref={activeRef} point={point} color={color}>
-          {<span>{index + 1}</span>}
+        <CircleActive point={point} color={color}>
+          {
+            <span
+              ref={activeRef}
+              style={{
+                fontSize: "20px",
+                color: "#42567A",
+              }}
+            >
+              {index + 1}
+            </span>
+          }
         </CircleActive>
       ) : (
         <CircleListItem
@@ -80,6 +111,3 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
 };
 
 export default CirclePointsList;
-
-//104.50000000000003px, -258.49673200287623px
-//67.00129134564013

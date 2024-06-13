@@ -10,20 +10,22 @@ import { useActions } from "../../hooks/useActions";
 interface CircleProps {
   radius: number;
   color: string;
+  ddd: (point: IPoint) => void;
 }
 
-const Circle: FC<CircleProps> = ({ radius, color }) => {
-  const ref = useRef<HTMLDivElement>(null);
+const Circle: FC<CircleProps> = ({ radius, color, ddd }) => {
+  const points = getCirclePoints(radius, 6);
 
   const { count } = useAppSelector(countSelector);
   const { setCount } = useActions();
-  const points = getCirclePoints(radius, 6);
+
+  const ref = useRef<HTMLDivElement>(null);
+
   const [prevNumber, setPrevNumber] = useState(0);
 
-  const handleRotateCircle = (point: IPoint) => {
-    console.log(point.rotate);
-    console.log(prevNumber);
+  const [calcRotate, setCalcRotate] = useState<number>();
 
+  const handleRotateCircle = (point: IPoint) => {
     const isCalculateRotate =
       point.rotate - prevNumber < -239
         ? Math.abs(point.rotate + prevNumber) === 0
@@ -35,8 +37,6 @@ const Circle: FC<CircleProps> = ({ radius, color }) => {
 
     const timeline = gsap.timeline({ paused: true });
 
-    console.log(isCalculateRotate);
-
     timeline.to(ref.current, {
       duration: 1,
       rotation: `+=${isCalculateRotate}`,
@@ -46,6 +46,7 @@ const Circle: FC<CircleProps> = ({ radius, color }) => {
 
     timeline.play();
     setPrevNumber(point.rotate);
+    setCalcRotate(isCalculateRotate);
   };
 
   return (
@@ -58,7 +59,9 @@ const Circle: FC<CircleProps> = ({ radius, color }) => {
             color={color}
             key={index}
             index={index}
+            calcRotate={calcRotate}
             setCount={setCount}
+            ddd={ddd}
             handleRotateCircle={handleRotateCircle}
           />
         ))}

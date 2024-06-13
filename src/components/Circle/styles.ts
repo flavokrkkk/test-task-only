@@ -11,14 +11,12 @@ export const CircleContainer = styled.div`
 `;
 
 export const CircleWrapper = styled.div<CircleWrapperProps>`
-  // position: absolute;
   width: ${({ radius }) => radius * 2}px;
   height: ${({ radius }) => radius * 2}px;
   border: 1px solid ${({ color }) => color};
   border-radius: 100%;
-  // transform: translate(-50%, -50%);
   left: 50%;
-  opacity: 50%;
+  opacity: 60%;
   top: 50%;
   display: flex;
   justify-content: center;

@@ -27,8 +27,8 @@ export const CircleActive = styled.div<CircleListItemProps>`
   position: absolute;
   cursor: pointer;
   z-index: 3;
-  width: 56px;
-  height: 56px;
+  width: 62px;
+  height: 62px;
   background-color: #f4f5f9;
   border: 1px solid #42567a;
   border-radius: 50%;
