@@ -2,6 +2,7 @@ import { FC, useRef, useState } from "react";
 import { SwiperRef, Swiper as Swipers } from "swiper/react";
 import { ISlide } from "../../models/ISlide";
 import {
+  ButtonWrapper,
   SlideCard,
   SlideCardText,
   SlideCardTitle,
@@ -49,7 +50,6 @@ const Swiper: FC<SwiperProps> = ({ dataSlide }) => {
     tl.to(textEl, {
       duration: 0.4,
       opacity: 0,
-      // scale: 0.8,
       ease: "power2.out",
       delay: 0.001,
     });
@@ -70,8 +70,30 @@ const Swiper: FC<SwiperProps> = ({ dataSlide }) => {
   return (
     <SwiperContainer>
       <Swipers
-        ref={swiperRef}
         slidesPerView={consts.SLIDES_PER_VIEW}
+        breakpoints={{
+          380: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          540: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          1400: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+        }}
+        ref={swiperRef}
         spaceBetween={30}
         onSlideNextTransitionStart={() => {
           setIsVisibleNext(false);
@@ -81,8 +103,6 @@ const Swiper: FC<SwiperProps> = ({ dataSlide }) => {
           setIsVisiblePrev(false);
           setIsVisibleNext(true);
         }}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
       >
         {dataSlide.map((slide) => (
           <SlideCard>
@@ -91,27 +111,29 @@ const Swiper: FC<SwiperProps> = ({ dataSlide }) => {
           </SlideCard>
         ))}
       </Swipers>
-      {isVisiblePrev && (
-        <Button
-          absolute
-          top={ButtonTop.end}
-          position={ButtonPosition.left}
-          onClick={handleSlidePrev}
-        >
-          <ArrowPrev />
-        </Button>
-      )}
+      <ButtonWrapper>
+        {isVisiblePrev && (
+          <Button
+            absolute
+            top={ButtonTop.end}
+            position={ButtonPosition.left}
+            onClick={handleSlidePrev}
+          >
+            <ArrowPrev />
+          </Button>
+        )}
 
-      {isVisibleNext && (
-        <Button
-          absolute
-          position={ButtonPosition.right}
-          top={ButtonTop.end}
-          onClick={handleSlideNext}
-        >
-          <ArrowNext />
-        </Button>
-      )}
+        {isVisibleNext && (
+          <Button
+            absolute
+            position={ButtonPosition.right}
+            top={ButtonTop.end}
+            onClick={handleSlideNext}
+          >
+            <ArrowNext />
+          </Button>
+        )}
+      </ButtonWrapper>
     </SwiperContainer>
   );
 };

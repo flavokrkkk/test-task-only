@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CountState } from "./types";
 
 const initialState = <CountState>{
-  count: 6,
+  count: 1,
 };
 
 export const countSlice = createSlice({

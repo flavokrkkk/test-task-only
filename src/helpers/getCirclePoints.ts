@@ -21,18 +21,5 @@ export const getCirclePoints = (
       });
     }
   }
-  return points;
+  return points.reverse();
 };
-
-// if (i === 0) {
-//   const rotate = i === 0 ? -60 : -60 * (i + 1);
-//   points.push({ x, y, rotate });
-// }
-
-// if ((x && y < 0) || (x && y > 0 && i !== 0)) {
-//   const rotate = i === 0 ? -60 : -60 * (i + 1);
-//   points.push({ x, y, rotate });
-// } else if (i !== 0) {
-//   const rotate = i === 0 ? 60 : 60 * (i + 1);
-//   points.push({ x, y, rotate });
-// }

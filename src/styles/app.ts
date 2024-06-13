@@ -8,6 +8,39 @@ export const Container = styled.div`
   position: relative;
 
   height: 100vh;
+
+  @media (max-width: 1440px) {
+    width: 1100px;
+    border: none;
+  }
+
+  @media (max-width: 1110px) {
+    width: 1000px;
+  }
+
+  @media (max-width: 1010px) {
+    width: 900px;
+  }
+
+  @media (max-width: 910px) {
+    width: 690px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 820px) {
+    width: 600px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 700px) {
+    width: 510px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 510px) {
+    max-width: 370px;
+    margin: 0 auto;
+  }
 `;
 
 export const MainWrapper = styled.div`
@@ -20,6 +53,10 @@ export const MainWrapper = styled.div`
 const Line = styled.div`
   position: absolute;
   background-color: #000;
+
+  @media (max-width: 700px) {
+    // position: static;
+  }
 `;
 
 export const HorizontalLine = styled(Line)`
@@ -30,6 +67,11 @@ export const HorizontalLine = styled(Line)`
   background-color: #42567a;
   z-index: 3;
   opacity: 50%;
+
+  @media (max-width: 1440px) {
+    display: none;
+    top: 70%;
+  }
 `;
 
 export const VerticalLine = styled(Line)`
@@ -39,6 +81,10 @@ export const VerticalLine = styled(Line)`
   transform: translateX(-20%);
   background-color: #42567a;
   opacity: 50%;
+
+  @media (max-width: 1440px) {
+    display: none;
+  }
 `;
 
 export const BlockTitle = styled.div`
@@ -49,11 +95,26 @@ export const BlockTitle = styled.div`
   border-image: linear-gradient(#3877ee, #ef5da8) 30;
   border-width: 0px 0px 0px 5px;
   border-style: solid;
+
+  @media (max-width: 1110px) {
+    border: none;
+    width: 240px;
+  }
+
+  @media (max-width: 1110px) {
+    margin-top: 120px;
+
+    width: 240px;
+  }
 `;
 
 export const Title = styled.h1`
   font-size: 54px;
   margin-left: 70px;
+  @media (max-width: 1110px) {
+    font-size: 34px;
+    margin-left: 10px;
+  }
 `;
 
 export const NumberWrapper = styled.div`
@@ -61,30 +122,83 @@ export const NumberWrapper = styled.div`
   z-index: 2;
   display: flex;
   gap: 105px;
+
+  @media (max-width: 1440px) {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+  }
+
+  @media (max-width: 600px) {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    border-bottom: 1px solid #42567a;
+  }
+  @media (max-width: 450px) {
+    justify-content: space-evenly;
+  }
+  @media (max-width: 415px) {
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 130px;
+  }
 `;
 
 export const NumberOneTitle = styled.h1`
   font-size: 200px;
   letter-spacing: -5px;
   color: #5d5fef;
+  @media (max-width: 1440px) {
+    font-size: 56px;
+  }
+  @media (max-width: 450px) {
+    font-size: 65px;
+  }
 `;
 export const NumberTwoTitle = styled.h1`
   font-size: 200px;
   color: #ef5da8;
+  @media (max-width: 1440px) {
+    font-size: 56px;
+  }
+  @media (max-width: 450px) {
+    font-size: 65px;
+  }
 `;
 
 export const SliderWrapper = styled.div`
   width: 1440px;
-  // position: absolute;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: end;
+  @media (max-width: 1440px) {
+    width: 1140px;
+  }
+
+  @media (max-width: 1110px) {
+    width: 1140px;
+    margin-bottom: 200px;
+  }
+
+  @media (max-width: 910px) {
+    width: 940px;
+    margin-bottom: 200px;
+  }
 `;
 
 export const ArrowsWrapper = styled.div`
   position: absolute;
   left: 0;
   padding: 70px;
-  bottom: 150px;
+  bottom: 160px;
+
+  @media (max-width: 1110px) {
+    padding: 5px;
+    bottom: 20px;
+  }
 `;

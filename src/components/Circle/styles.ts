@@ -8,6 +8,10 @@ interface CircleWrapperProps {
 export const CircleContainer = styled.div`
   position: absolute;
   z-index: 111;
+
+  @media (max-width: 1440px) {
+    display: none;
+  }
 `;
 
 export const CircleWrapper = styled.div<CircleWrapperProps>`

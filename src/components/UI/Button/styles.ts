@@ -53,4 +53,24 @@ export const ButttonStyle = styled.button<ButtonStyleProps>`
   border: ${({ isBorder }) =>
     isBorder ? "1px solid #42567A" : "1px solid #fff"};
   border-radius: 50%;
+
+  @media (max-width: 1440px) {
+    ${({ position }) => {
+      switch (position !== undefined) {
+        case position === ButtonPosition.left:
+          return css`
+            left: 5px;
+          `;
+        case position === ButtonPosition.right:
+          return css`
+            right: 5px;
+          `;
+      }
+    }};
+  }
+
+  @media (max-width: 1440px) {
+    width: ${({ size }) => (size === ButtonSize.md ? "30px" : "")};
+    height: ${({ size }) => (size === ButtonSize.md ? "30px" : "")};
+  }
 `;

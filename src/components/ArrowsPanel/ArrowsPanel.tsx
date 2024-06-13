@@ -28,16 +28,6 @@ const ArrowsPanel: FC<ArowsPanelProps> = ({
   handleNextSlide,
   handlePrevSlide,
 }) => {
-  const handlePrevSlideCount = () => {
-    handlePrevSlide();
-    //бегу по поинтс, по каунту нахожу point и меняю ротейт в предыдущий
-  };
-
-  const handleNextSlideCount = () => {
-    handleNextSlide();
-    //бегу по поинтс, по каунту нахожу point и меняю ротейт в предыдущий
-  };
-
   return (
     <>
       <CounterWrapper>
@@ -51,7 +41,7 @@ const ArrowsPanel: FC<ArowsPanelProps> = ({
           top={ButtonTop.none}
           size={ButtonSize.md}
           position={ButtonPosition.none}
-          onClick={handlePrevSlideCount}
+          onClick={handlePrevSlide}
         >
           <ArrowPrevCount />
         </Button>
@@ -62,7 +52,7 @@ const ArrowsPanel: FC<ArowsPanelProps> = ({
           size={ButtonSize.md}
           top={ButtonTop.none}
           position={ButtonPosition.none}
-          onClick={handleNextSlideCount}
+          onClick={handleNextSlide}
         >
           <ArrowNextCount />
         </Button>
