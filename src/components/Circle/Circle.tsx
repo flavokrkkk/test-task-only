@@ -1,11 +1,11 @@
-import { FC, RefObject } from "react";
+import React, { FC, RefObject } from "react";
 import { CircleContainer, CircleWrapper } from "./styles";
-import { IPoint } from "../../models/IPoint";
 import CirclePointsList from "../CirclePointsList/CirclePointsList";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { countSelector } from "../../store/selectors";
 import { useActions } from "../../hooks/useActions";
 import { useAnimate } from "../../hooks/useAnimate";
+import { IPoint } from "../../models/IPoint";
 interface CircleProps {
   color: string;
   points: IPoint[];

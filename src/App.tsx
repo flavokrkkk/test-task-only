@@ -1,5 +1,14 @@
-import Circle from "./components/Circle/Circle";
-import Swiper from "./components/Swiper/Swiper";
+import React, { useEffect, useRef, useState } from "react";
+import { useAppSelector } from "./hooks/useAppSelector";
+import { countSelector } from "./store/selectors";
+import { useActions } from "./hooks/useActions";
+import { getCirclePoints } from "./helpers/getCirclePoints";
+import { consts } from "./utils/const";
+import { ISlide } from "./models/ISlide";
+import { useGSAP } from "@gsap/react";
+import { handleActiveSlide } from "./helpers/handleActiveSlide";
+import gsap from "gsap";
+
 import {
   ArrowsWrapper,
   BlockTitle,
@@ -13,23 +22,12 @@ import {
   Title,
   VerticalLine,
 } from "./styles/app";
-import "swiper/css";
-import "swiper/css/navigation";
-import { AllData } from "./utils/mockData";
-import { useEffect, useRef, useState } from "react";
-import { ISlide } from "./models/ISlide";
-import { useAppSelector } from "./hooks/useAppSelector";
-import { countSelector } from "./store/selectors";
-import { useActions } from "./hooks/useActions";
+import Circle from "./components/Circle/Circle";
 import ArrowsPanel from "./components/ArrowsPanel/ArrowsPanel";
-import { getCirclePoints } from "./helpers/getCirclePoints";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { handleActiveSlide } from "./helpers/handleActiveSlide";
-import { handleMinMaxYear } from "./helpers/handleMinMaxYear";
-import { consts } from "./utils/const";
+import { AllData, handleMinMaxYear } from "./utils/mockData";
+import Swiper from "./components/Swiper/Swiper";
 
-function App() {
+const App = () => {
   const { count } = useAppSelector(countSelector);
   const { setCount } = useActions();
   const points = getCirclePoints(consts.radius, consts.numPoints);
@@ -112,6 +110,6 @@ function App() {
       </Container>
     </>
   );
-}
+};
 
 export default App;

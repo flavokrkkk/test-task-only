@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { ButttonStyle } from "./styles";
 import {
   ButtonColor,
@@ -18,7 +18,6 @@ interface ButtonProps {
   isBorder?: boolean;
   onClick?: () => void;
 }
-
 const Button: FC<ButtonProps> = ({
   isDisabled,
   isBorder,

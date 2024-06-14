@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import { SwiperRef, Swiper as Swipers } from "swiper/react";
 import { ISlide } from "../../models/ISlide";
 import {
@@ -15,6 +15,8 @@ import Button from "../UI/Button/Button";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+import "swiper/css";
+
 interface SwiperProps {
   dataSlide: ISlide[];
 }
@@ -24,7 +26,6 @@ const Swiper: FC<SwiperProps> = ({ dataSlide }) => {
   const [isVisiblePrev, setIsVisiblePrev] = useState(false);
 
   const swiperRef = useRef<SwiperRef>(null);
-
   const handleSlideChange = (index: number) => {
     swiperRef.current?.swiper.slideTo(index);
   };

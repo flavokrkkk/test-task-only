@@ -135,3 +135,10 @@ export const AllData = <IAllData[]>[
   { id: 5, data: dataSlideFive },
   { id: 6, data: dataSlideSix },
 ];
+
+export const handleMinMaxYear = (
+  array: ISlide[]
+): { min: number; max: number } => {
+  const year = array.map((el) => el.year);
+  return { min: Math.min(...year), max: Math.max(...year) };
+};

@@ -1,8 +1,8 @@
-import { FC, useRef, useState } from "react";
-import { IPoint } from "../../models/IPoint";
+import React, { FC, useRef, useState } from "react";
 import { CircleActive, CircleListItem, PointSpan } from "./styles";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { IPoint } from "../../models/IPoint";
 
 interface CirclePointsListProps {
   point: IPoint;
@@ -13,7 +13,6 @@ interface CirclePointsListProps {
   setCount: (value: number) => void;
   handleRotateCircle: (point: IPoint) => void;
 }
-
 const CirclePointsList: FC<CirclePointsListProps> = ({
   point,
   color,
