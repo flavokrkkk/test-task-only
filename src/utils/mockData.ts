@@ -1,3 +1,4 @@
+import { IAllData } from "../models/IAllData";
 import { ISlide } from "../models/ISlide";
 
 export const dataSlideOne = <ISlide[]>[
@@ -126,11 +127,6 @@ export const dataSlideSix = <ISlide[]>[
   },
 ];
 
-export interface IAllData {
-  id: number;
-  data: ISlide[];
-}
-
 export const AllData = <IAllData[]>[
   { id: 1, data: dataSlideOne },
   { id: 2, data: dataSlideTwo },
@@ -139,15 +135,3 @@ export const AllData = <IAllData[]>[
   { id: 5, data: dataSlideFive },
   { id: 6, data: dataSlideSix },
 ];
-
-export const handleActiveSlide = (active: number = 1): ISlide[] => {
-  const data = AllData.filter((el) => el.id === active);
-  return data[0].data;
-};
-
-export const handleMinMaxYear = (
-  array: ISlide[]
-): { min: number; max: number } => {
-  const year = array.map((el) => el.year);
-  return { min: Math.min(...year), max: Math.max(...year) };
-};

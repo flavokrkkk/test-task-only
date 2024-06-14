@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { IAllData } from "../../utils/mockData";
 import Button from "../UI/Button/Button";
 import {
   ButtonColor,
@@ -10,6 +9,7 @@ import {
 import ArrowNextCount from "../../assets/ArrowNextCount";
 import ArrowPrevCount from "../../assets/ArrowPrevCount";
 import { ButtonWrapper, CounterWrapper } from "./styles";
+import { IAllData } from "../../models/IAllData";
 
 interface ArowsPanelProps {
   isDisabledPrev: boolean;

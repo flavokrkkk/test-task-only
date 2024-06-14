@@ -1,5 +1,7 @@
 export const enum consts {
   SLIDES_PER_VIEW = 3,
+  numPoints = 6,
+  radius = 265,
 }
 
 export const enum ButtonTop {

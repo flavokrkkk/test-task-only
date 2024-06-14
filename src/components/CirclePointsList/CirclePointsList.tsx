@@ -1,6 +1,6 @@
 import { FC, useRef, useState } from "react";
 import { IPoint } from "../../models/IPoint";
-import { CircleActive, CircleListItem } from "./styles";
+import { CircleActive, CircleListItem, PointSpan } from "./styles";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -81,17 +81,7 @@ const CirclePointsList: FC<CirclePointsListProps> = ({
     <>
       {isActiveCount ? (
         <CircleActive point={point} color={color}>
-          {
-            <span
-              ref={activeRef}
-              style={{
-                fontSize: "20px",
-                color: "#42567A",
-              }}
-            >
-              {index + 1}
-            </span>
-          }
+          {<PointSpan ref={activeRef}>{index + 1}</PointSpan>}
         </CircleActive>
       ) : (
         <CircleListItem

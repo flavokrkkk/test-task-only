@@ -34,3 +34,8 @@ export const CircleActive = styled.div<CircleListItemProps>`
   border-radius: 50%;
   transform: ${({ point }) => `translate(${point.x}px, ${point.y}px)`};
 `;
+
+export const PointSpan = styled.span`
+  fontsize: 20px;
+  color: #42567a;
+`;

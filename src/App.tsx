@@ -15,7 +15,7 @@ import {
 } from "./styles/app";
 import "swiper/css";
 import "swiper/css/navigation";
-import { AllData, handleActiveSlide, handleMinMaxYear } from "./utils/mockData";
+import { AllData } from "./utils/mockData";
 import { useEffect, useRef, useState } from "react";
 import { ISlide } from "./models/ISlide";
 import { useAppSelector } from "./hooks/useAppSelector";
@@ -25,11 +25,14 @@ import ArrowsPanel from "./components/ArrowsPanel/ArrowsPanel";
 import { getCirclePoints } from "./helpers/getCirclePoints";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { handleActiveSlide } from "./helpers/handleActiveSlide";
+import { handleMinMaxYear } from "./helpers/handleMinMaxYear";
+import { consts } from "./utils/const";
 
 function App() {
   const { count } = useAppSelector(countSelector);
   const { setCount } = useActions();
-  const points = getCirclePoints(265, 6);
+  const points = getCirclePoints(consts.radius, consts.numPoints);
   const [isDisabledNext, setIsDisabledNext] = useState(false);
   const [isDisabledPrev, setIsDisabledPrev] = useState(false);
   const [activeData, setActiveData] = useState<ISlide[]>([]);
@@ -63,7 +66,9 @@ function App() {
   }, [count]);
 
   useEffect(() => {
-    count >= 6 ? setIsDisabledNext(true) : setIsDisabledNext(false);
+    count >= consts.numPoints
+      ? setIsDisabledNext(true)
+      : setIsDisabledNext(false);
     count <= 1 ? setIsDisabledPrev(true) : setIsDisabledPrev(false);
   }, [count]);
 
@@ -83,7 +88,7 @@ function App() {
           <Circle
             circleRef={circleRef}
             points={points}
-            radius={265}
+            radius={consts.radius}
             color="#42567A"
           />
           <NumberWrapper ref={numbersRef}>
